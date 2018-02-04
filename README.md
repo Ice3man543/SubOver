@@ -9,6 +9,7 @@ You need to have Python 2.7 installed on your machine. The following additional 
 - colorama
 
 Simply clone the repo using `git clone https://github.com/Ice3man543/SubOver.git`.
+
 cd into the repo using `cd SubOver` and run `python subover.py -h`.
 
 ## Usage
@@ -80,6 +81,7 @@ apo-setup.fxc.something.com
 ### Development
 
 Want to contribute? Great! 
+
 You can add more services or recommend any changes to the existing ones. Any kind of help is appreciated.
 
 License
