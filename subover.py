@@ -82,7 +82,7 @@ class ThreadDns(threading.Thread):
         self.queue = queue
         self.lock = lock
 
-    def run(self):      
+    def run(self):
         while not self.queue.empty():
             try:
                 subdomain = self.queue.get()
@@ -96,6 +96,7 @@ class ThreadDns(threading.Thread):
                     self.lock.release()
             except:
                 error = "error"
+            finally:
                 self.queue.task_done() 
 
     def check_domain_resolve(self, cname):
@@ -139,7 +140,7 @@ def scan_takeovers(domainlist, threads):
                 t.setDaemon(True)
                 t.start()
 
-        # wait on the queue until everything has been processed     
+        # wait on the queue until everything has been processed
         queue.join()
 
 
