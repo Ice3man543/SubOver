@@ -37,6 +37,7 @@ import time
 import json
 import Queue
 import threading
+import os
 import sys
 import urllib3
 
@@ -70,6 +71,8 @@ global_verbosity = False
 
 # Global Output Storage Buffer
 output_buffer = ""
+
+script_path = os.path.dirname(os.path.realpath(__file__))
 
 
 # Main DNS Scanning Thread
@@ -187,7 +190,7 @@ def main():
                 num_threads = 20
 
         # Load the providers data 
-        f = open("providers.json", "r")
+        f = open("{}".format(os.path.join(script_path, "providers.json")), "r")
         global providers_data
         providers_data = json.loads(f.read())
         f.close()
