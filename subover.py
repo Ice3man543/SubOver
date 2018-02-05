@@ -1,4 +1,4 @@
-#
+#!/usr/bin/env python
 # subover.py : A Subdomain Takeover Tool
 # Written By : @Ice3man
 # Twitter : @ice3man543
@@ -31,7 +31,6 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-#! /usr/bin/python
 
 import argparse
 import time
@@ -72,144 +71,150 @@ global_verbosity = False
 # Global Output Storage Buffer
 output_buffer = ""
 
+
 # Main DNS Scanning Thread
 class ThreadDns(threading.Thread):
-    def __init__(self, queue,lock):
+    def __init__(self, queue, lock):
         threading.Thread.__init__(self)
-        self.queue      = queue
-        self.lock       = lock
-           
-    def run(self):    	
-        while not self.queue.empty(): 
+        self.queue = queue
+        self.lock = lock
+
+    def run(self):      
+        while not self.queue.empty():
             try:
-        	   subdomain = self.queue.get()
-        	   answer = dns.resolver.query(subdomain, 'CNAME')
-        	   for rdata in answer:
+                subdomain = self.queue.get()
+                answer = dns.resolver.query(subdomain, 'CNAME')
+                for rdata in answer:
                     self.lock.acquire()
-                    if global_verbosity==True:
-                    	print "[-] Subdomain: " , subdomain  , " CNAME: " , rdata.target
+                    if global_verbosity:
+                        print "[-] Subdomain: ", subdomain, " CNAME: ", rdata.target
                     self.check_domain_resolve(rdata.target.to_text())
                     self.detect_takeover(rdata.target.to_text(), subdomain)
                     self.lock.release()
             except:
-        	   	error="error"
-
-			self.queue.task_done() 
+                error = "error"
+                self.queue.task_done() 
 
     def check_domain_resolve(self, cname):
         try:
-        	dns.resolver.query(cname)
-        	return True
+            dns.resolver.query(cname)
+            return True
         except:
-        	return False
+            return False
 
     def detect_takeover(self, domain, subdomain):
-    	''' Here, we start loading the json providers data and
-    		use that data to check for all potential takeovers '''
-    	global providers_data
+        ''' Here, we start loading the json providers data and
+                use that data to check for all potential takeovers '''
+        global providers_data
         for provider in providers_data["providers"]:
-        	if provider["cname"] in domain:
-        		print b, "[",domain,"] Company:", provider["name"], " CNAME:", provider["cname"], " Found On:", subdomain, rs
-        		try:
-        			urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-        			http = urllib3.PoolManager(headers={'user-agent': 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'})
-        			web_response = http.request('GET', "http://"+subdomain).data.decode('utf-8')
-        			for response in provider["response"]:
-        				if response in web_response:
-        					with self.lock:
-        						print g, "[+] Subdomain Takeover Detected : ", subdomain, rs
-        						output_buffer = output_buffer + "\n[+] Subdomain Takeover On : " + subdomain
-        		except Exception as e:
-        			print e
+            if provider["cname"] in domain:
+                print b, "[", domain, "] Company:", provider["name"], " CNAME:", provider["cname"], " Found On:", subdomain, rs
+                try:
+                    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+                    http = urllib3.PoolManager(headers={'user-agent': 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'})
+                    web_response = http.request('GET', "http://"+subdomain).data.decode('utf-8')
+                    for response in provider["response"]:
+                        if response in web_response:
+                            with self.lock:
+                                print g, "[+] Subdomain Takeover Detected : ", subdomain, rs
+                                output_buffer = output_buffer + "\n[+] Subdomain Takeover On : " + subdomain
+                except Exception as e:
+                    print e
+
 
 def scan_takeovers(domainlist, threads):
-	lock = threading.Lock()
+        lock = threading.Lock()
 
-	# Read all targets available in the file
-	domainfile = open(domainlist)
-	for target in domainfile:
-		queue.put(target.strip())
+        # Read all targets available in the file
+        domainfile = open(domainlist)
+        for target in domainfile:
+                queue.put(target.strip())
 
-	#spawn a pool of threads, and pass them queue instance 
-	for i in range(threads):
-		t = ThreadDns(queue, lock)
-		t.setDaemon(True)
-		t.start()
+        # spawn a pool of threads, and pass them queue instance 
+        for i in range(threads):
+                t = ThreadDns(queue, lock)
+                t.setDaemon(True)
+                t.start()
 
-	#wait on the queue until everything has been processed     
-	queue.join()
+        # wait on the queue until everything has been processed     
+        queue.join()
+
 
 def main():
-	# Argument Parsing
-	parser = argparse.ArgumentParser(version='1.0', description="The Best Subdomain Takeover Tool", epilog="Usage : subover.py -l <subdomain_list>.txt -t <num_threads> -o <output_file>.txt")
+        # Argument Parsing
+        parser = argparse.ArgumentParser(version='1.0',
+                                         description="The Best Subdomain Takeover Tool",
+                                         epilog="Usage : subover.py -l <subdomain_list>.txt -t <num_threads> -o <output_file>.txt")
 
-	parser.add_argument('-l', action='store', dest='targets_list',
-                    help='A text file containing list of targets')
+        parser.add_argument('-l', action='store', dest='targets_list',
+                            help='A text file containing list of targets')
 
-	parser.add_argument('-V', action='store_true', default=False,
-                    dest='boolean_switch',
-                    help='Display Verbose Information')
+        parser.add_argument('-V', action='store_true', default=False,
+                            dest='boolean_switch', 
+                            help='Display Verbose Information')
 
-	parser.add_argument('-t', action='store', dest='num_threads',
-                    help='Number of Threads To Use (Default=20)', type=int)
+        parser.add_argument('-t', action='store', dest='num_threads',
+                            help='Number of Threads To Use (Default=20)',
+                            type=int)
 
-	parser.add_argument('-o', action='store', dest='output_name',
-                    help='Name of the output file')
+        parser.add_argument('-o', action='store', dest='output_name',
+                            help='Name of the output file')
 
-	results = parser.parse_args()
+        results = parser.parse_args()
 
-	# Get the target list file and
-	# other informations
-	target_list_file = results.targets_list
-	verbose_settings = results.boolean_switch
-	num_threads = results.num_threads
-	output_name = results.output_name
+        # Get the target list file and
+        # other informations
+        target_list_file = results.targets_list
+        verbose_settings = results.boolean_switch
+        num_threads = results.num_threads
+        output_name = results.output_name
 
-	if (target_list_file == None):
-		print "\nerror : no valid inputs provided"
-		print "for help, try with option -h"
-		sys.exit(0)
+        if target_list_file is None:
+                print "\nerror : no valid inputs provided"
+                print "for help, try with option -h"
+                sys.exit(0)
 
-	# set the global verbosity level 
-	global global_verbosity 
-	global_verbosity = verbose_settings
+        # set the global verbosity level 
+        global global_verbosity 
+        global_verbosity = verbose_settings
 
-	# Output file
-	if (output_name == None):
-		output_name = None
+        # Output file
+        if output_name is None:
+                output_name = None
 
-	# default threads
-	if (num_threads == None):
-		num_threads = 20
+        # default threads
+        if num_threads is None:
+                num_threads = 20
 
-	# Load the providers data 
-	f = open("providers.json", "r")
-	global providers_data
-	providers_data = json.loads(f.read())
-	f.close()
+        # Load the providers data 
+        f = open("providers.json", "r")
+        global providers_data
+        providers_data = json.loads(f.read())
+        f.close()
 
-	print r + """
+        print r + """
              ____        _      ___                 
             / ___| _   _| |__  / _ \__   _____ _ __ 
             \___ \| | | | '_ \| | | \ \ / / _ \ '__|
              ___) | |_| | |_) | |_| |\ V /  __/ |   
             |____/ \__,_|_.__/ \___/  \_/ \___|_|   
 
-            					Take Over Everything :-)""" + rs
+                                        Take Over Everything :-)""" + rs
 
-	print c + "\n[x] subover : Powerful Subdomain Takeover Tool" + rs
-	print c + "[x] Author : @Ice3man (Twitter : @ice3man543)" + rs
-	print c + "[x] Github : www.github.com/ice3man543" + rs
-	print c + "[x] Version : 1.0" + rs
+        print c + "\n[x] subover : Powerful Subdomain Takeover Tool" + rs
+        print c + "[x] Author : @Ice3man (Twitter : @ice3man543)" + rs
+        print c + "[x] Github : www.github.com/ice3man543" + rs
+        print c + "[x] Version : 1.0" + rs
 
-	print y + "\n[-] Using Target List : " + target_list_file  + rs
-	print y + "[-] No of Threads : " + str(num_threads) + "\n" + rs
-	
-	scan_takeovers(target_list_file, num_threads) 
-    
-	if (output_name != None):
-		with open(output_name, "a+") as outfile:
-			outfile.write(output_buffer)
+        print y + "\n[-] Using Target List : " + target_list_file + rs
+        print y + "[-] No of Threads : " + str(num_threads) + "\n" + rs
+
+        scan_takeovers(target_list_file, num_threads) 
+
+        if (output_name is not None):
+            with open(output_name, "a+") as outfile:
+                outfile.write(output_buffer)
+
 
 if __name__ == '__main__':
-	main()
+    main()
