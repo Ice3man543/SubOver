@@ -40,10 +40,6 @@ import threading
 import os
 import sys
 import urllib3
-import socket
-
-# Set deafult timeout to resolve timeout issue
-socket.setdefaulttimeout(10)
 
 queue = Queue.Queue()
 
@@ -115,19 +111,20 @@ class ThreadDns(threading.Thread):
                 use that data to check for all potential takeovers '''
         global providers_data
         for provider in providers_data["providers"]:
-            if provider["cname"] in domain:
-                print b, "[", domain, "] Company:", provider["name"], " CNAME:", provider["cname"], " Found On:", subdomain, rs
-                try:
-                    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-                    http = urllib3.PoolManager(retries=1, headers={'user-agent': 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'})
-                    web_response = http.request('GET', "http://"+subdomain).data.decode('utf-8')
-                    for response in provider["response"]:
-                        if response in web_response:
-                            with self.lock:
-                                print g, "[+] Subdomain Takeover Detected : ", subdomain, rs
-                                output_buffer = output_buffer + "\n[+] Subdomain Takeover On : " + subdomain
-                except Exception as e:
-                    print e
+            for cname in provider["cname"]:
+                if cname in domain:
+                    print b, "[", domain, "] Company:", provider["name"], " CNAME:", cname, " Found On:", subdomain, rs
+                    try:
+                        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+                        http = urllib3.PoolManager(headers={'user-agent': 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'}, timeout=urllib3.Timeout(connect=5.0, read=10.0), retries=urllib3.Retry(3, redirect=10))
+                        web_response = http.request('GET', "http://"+subdomain).data.decode('utf-8')
+                        for response in provider["response"]:
+                            if response in web_response:
+                                with self.lock:
+                                    print g, "[+] Subdomain Takeover Detected : ", subdomain, rs
+                                    output_buffer = output_buffer + "\n[+] Subdomain Takeover On : " + subdomain
+                    except Exception as e:
+                        print e
 
 
 def scan_takeovers(domainlist, threads):
