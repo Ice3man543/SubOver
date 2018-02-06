@@ -1,6 +1,6 @@
 # SubOver
 
-Subover is a Hostile Subdomain Takeover tool designed in Python. From start, it has been aimed with speed and efficiency in mind. Till date, SubOver detects 35 services which is much more than any other tool out there. The tool is multithreaded and hence delivers good speed. It can easily detect and report potential subdomain takeovers that exist. The list of potentially hijackable services is very comprehensive and it is what makes this tool so powerful.
+Subover is a Hostile Subdomain Takeover tool designed in Python. From start, it has been aimed with speed and efficiency in mind. Till date, SubOver detects 35+ services which is much more than any other tool out there. The tool is multithreaded and hence delivers good speed. It can easily detect and report potential subdomain takeovers that exist. The list of potentially hijackable services is very comprehensive and it is what makes this tool so powerful.
 
 ## Installing
 
@@ -27,7 +27,6 @@ cd into the repo using `cd SubOver` and run `python subover.py -h`.
 - unbounce
 - tumblr
 - shopify
-- instapage
 - instapage
 - desk
 - tictail
@@ -57,6 +56,8 @@ cd into the repo using `cd SubOver` and run `python subover.py -h`.
 - feedpress
 - freshdesk
 - surge
+- surveygizmo
+
 
 Count : 35
   
@@ -72,6 +73,13 @@ backend.example.com
 something.someone.com
 apo-setup.fxc.something.com
 ```
+
+## Your tool sucks!
+
+Yes, you're probably correct. Feel free to:
+
+- Not use it.
+- Show me how to do it better.
 
 # TODO
 
@@ -93,3 +101,10 @@ BSD 2-Clause "Simplified" License
 ## Contact
 
 Meet me on Twitter: [@Ice3man543](https://twitter.com/ice3man543)
+
+## Credits
+
+[Subdomain Takeover Scanner by 0x94](https://github.com/antichown/subdomain-takeover)
+[subjack : Hostile Subdomain Takeover Tool Written In GO](https://github.com/haccer/subjack)
+[Anshumanbh : tko-subs](https://github.com/anshumanbh/tko-subs)
+
