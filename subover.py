@@ -40,6 +40,10 @@ import threading
 import os
 import sys
 import urllib3
+import socket
+
+# Set deafult timeout to resolve timeout issue
+socket.setdefaulttimeout(10)
 
 queue = Queue.Queue()
 
@@ -115,7 +119,7 @@ class ThreadDns(threading.Thread):
                 print b, "[", domain, "] Company:", provider["name"], " CNAME:", provider["cname"], " Found On:", subdomain, rs
                 try:
                     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-                    http = urllib3.PoolManager(headers={'user-agent': 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'})
+                    http = urllib3.PoolManager(retries=1, headers={'user-agent': 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'})
                     web_response = http.request('GET', "http://"+subdomain).data.decode('utf-8')
                     for response in provider["response"]:
                         if response in web_response:
