@@ -104,7 +104,7 @@ Meet me on Twitter: [@Ice3man543](https://twitter.com/ice3man543)
 
 ## Credits
 
-[Subdomain Takeover Scanner by 0x94](https://github.com/antichown/subdomain-takeover)
-[subjack : Hostile Subdomain Takeover Tool Written In GO](https://github.com/haccer/subjack)
-[Anshumanbh : tko-subs](https://github.com/anshumanbh/tko-subs)
+- [Subdomain Takeover Scanner by 0x94](https://github.com/antichown/subdomain-takeover)
+- [subjack : Hostile Subdomain Takeover Tool Written In GO](https://github.com/haccer/subjack)
+- [Anshumanbh : tko-subs](https://github.com/anshumanbh/tko-subs)
 
