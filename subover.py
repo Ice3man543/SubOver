@@ -120,9 +120,10 @@ class ThreadDns(threading.Thread):
                         web_response = http.request('GET', "http://"+subdomain).data.decode('utf-8')
                         for response in provider["response"]:
                             if response in web_response:
-                                with self.lock:
-                                    print g, "[+] Subdomain Takeover Detected : ", subdomain, rs
-                                    output_buffer = output_buffer + "\n[+] Subdomain Takeover On : " + subdomain
+                                print g, "[+] Subdomain Takeover Detected : ", subdomain, rs
+                                global output_buffer
+                                output_buffer = output_buffer + "\n[+] Subdomain Takeover On : " + subdomain
+                                break
                     except Exception as e:
                         print e
 
