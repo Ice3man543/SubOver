@@ -1,0 +1,3 @@
+urllib3
+dnspython
+colorama
