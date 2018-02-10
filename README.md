@@ -8,16 +8,21 @@ You need to have Python 2.7 installed on your machine. The following additional 
 - dnspython 
 - colorama
 
-Simply clone the repo using `git clone https://github.com/Ice3man543/SubOver.git`.
 
-cd into the repo using `cd SubOver` and run `python subover.py -h`.
+```sh
+git clone https://github.com/Ice3man543/SubOver.git .
+cd SubOver
+# consider installing virtualenv
+pip install -r requirements.txt
+python subover.py -h
+```
 
 ## Usage
 
 `python subover.py -l subdomains.txt -o output_takeovers.txt`
 - `-l subdomains.txt` is the list of target subdomains. These can be discovered using various tool such as sublist3r or others.
 - `-o output_takeovers.txt`is the name of the output file. (Optional & Currently not very well formatted)
-- `-t 15` is the number of threads for the tool to use. (Optional)
+- `-t` 20 is the default number of threads that SubOver will use. (Optional)
 - `-V` is the switch for showing verbose output. (Optional, Default=False)
 
 ## Currently Checked Services

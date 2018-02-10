@@ -45,14 +45,9 @@ queue = Queue.Queue()
 
 try:
     import dns.resolver
-except:
-    print("error: You need to install dnspython")
-    sys.exit(1)
-
-try:
     import colorama
 except:
-    print("error: You need to install colorama")
+    print("pip install -r requirements.txt")
     sys.exit(1)
 
 # Set various colors requried throughout the script
