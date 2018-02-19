@@ -39,13 +39,13 @@ import Queue
 import threading
 import os
 import sys
-import urllib3
 
 queue = Queue.Queue()
 
 try:
     import dns.resolver
     import colorama
+    import requests
 except:
     print("pip install -r requirements.txt")
     sys.exit(1)
@@ -68,7 +68,6 @@ global_verbosity = False
 output_buffer = ""
 
 script_path = os.path.dirname(os.path.realpath(__file__))
-
 
 # Main DNS Scanning Thread
 class ThreadDns(threading.Thread):
@@ -110,9 +109,8 @@ class ThreadDns(threading.Thread):
                 if cname in domain:
                     print b, "[", domain, "] Company:", provider["name"], " CNAME:", cname, " Found On:", subdomain, rs
                     try:
-                        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-                        http = urllib3.PoolManager(headers={'user-agent': 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'}, timeout=urllib3.Timeout(connect=5.0, read=10.0), retries=urllib3.Retry(3, redirect=10))
-                        web_response = http.request('GET', "http://"+subdomain).data.decode('utf-8')
+                        headers = {'user-agent': 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'}
+                        web_response = requests.get("http://"+subdomain, headers=headers).text
                         for response in provider["response"]:
                             if response in web_response:
                                 print g, "[+] Subdomain Takeover Detected : ", subdomain, rs
@@ -144,7 +142,7 @@ def scan_takeovers(domainlist, threads):
 def main():
         # Argument Parsing
         parser = argparse.ArgumentParser(version='1.0',
-                                         description="The Best Subdomain Takeover Tool",
+                                         description="A Powerful Subdomain Takeover Tool",
                                          epilog="Usage : subover.py -l <subdomain_list>.txt -t <num_threads> -o <output_file>.txt")
 
         parser.add_argument('-l', action='store', dest='targets_list',
