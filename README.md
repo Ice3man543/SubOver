@@ -1,6 +1,6 @@
 # SubOver
 
-Subover is a Hostile Subdomain Takeover tool designed in Python. From start, it has been aimed with speed and efficiency in mind. Till date, SubOver detects 35+ services which is much more than any other tool out there. The tool is multithreaded and hence delivers good speed. It can easily detect and report potential subdomain takeovers that exist. The list of potentially hijackable services is very comprehensive and it is what makes this tool so powerful.
+Subover is a Hostile Subdomain Takeover tool designed in Python. From start, it has been aimed with speed and efficiency in mind. Till date, SubOver detects 36 services which is much more than any other tool out there. The tool is multithreaded and hence delivers good speed. It can easily detect and report potential subdomain takeovers that exist. The list of potentially hijackable services is very comprehensive and it is what makes this tool so powerful.
 
 ## Installing
 
@@ -27,44 +27,45 @@ python subover.py -h
 
 ## Currently Checked Services
 
-- github
-- heroku
-- unbounce
-- tumblr
-- shopify
-- instapage
-- desk
-- tictail
-- campaignmonitor
-- cargocollective
-- statuspage
-- amazonaws
-- cloudfront
-- bitbucket
-- squarespace
-- smartling
-- acquia
-- fastly
-- pantheon
-- zendesk
-- uservoice
-- wpengine
-- ghost
-- freshdesk
-- pingdom
-- tilda
-- wordpress
-- teamwork
-- helpjuice
-- helpscout
-- cargo
-- feedpress
-- freshdesk
-- surge
-- surveygizmo
+- Github
+- Heroku
+- Unbounce
+- Tumblr
+- Shopify
+- Instapage
+- Desk
+- Tictail
+- Campaignmonitor
+- Cargocollective
+- Statuspage
+- Amazonaws
+- Cloudfront
+- Bitbucket
+- Squarespace
+- Smartling
+- Acquia
+- Fastly
+- Pantheon
+- Zendesk
+- Uservoice
+- WPEngine
+- Ghost
+- Freshdesk
+- Pingdom
+- Tilda
+- Wordpress
+- Teamwork
+- Helpjuice
+- Helpscout
+- Cargo
+- Feedpress
+- Freshdesk
+- Surge
+- Surveygizmo
+- Mashery
 
 
-Count : 35
+Count : 36
   
 ## Screenshot
 ![tool_in_action](https://raw.githubusercontent.com/Ice3man543/SubOver/master/subover.png)
