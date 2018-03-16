@@ -1,4 +1,0 @@
-urllib3
-dnspython
-colorama
-requests
