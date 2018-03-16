@@ -7,7 +7,7 @@ Subover is a Hostile Subdomain Takeover tool originally written in python but re
 You need to have Golang installed on your machine. There are no additional requirements for this tool.
 
 ```sh
-git clone https://github.com/Ice3man543/SubOver.git .
+git clone https://github.com/Ice3man543/SubOver.git
 cd SubOver
 go build subover.go
 ```
