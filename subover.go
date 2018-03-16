@@ -216,7 +216,6 @@ func main() {
 	}
 
 	for i := 0; i < len(targets); i++ {
-		// append all the recieved target info
 		urls <- &Http{Url: targets[i]}
 	}
 
