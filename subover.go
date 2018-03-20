@@ -145,7 +145,7 @@ func (s *Http) Check() {
 						fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s", provider.Name, s.Url)
 						
 						if provider.Name == "cloudfront" {
-							fmt.Printf("\n[#] For %s takeovers, please Check both HTTP & HTTPS ")
+							fmt.Printf("\n[#] For Cloudfront takeovers, please Check both HTTP & HTTPS ")
 						}
 						
 						break
