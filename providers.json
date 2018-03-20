@@ -105,11 +105,6 @@
 		"response":["The thing you were looking for is no longer here", "The thing you were looking for is no longer here, or never was"]
 	},
 	{
-		"name":"freshdesk",
-		"cname":["freshdesk.com"],
-		"response":["May be this is still fresh!"]
-	},
-	{
 		"name":"pingdom",
 		"cname":["stats.pingdom.com"],
 		"response":["pingdom"]
