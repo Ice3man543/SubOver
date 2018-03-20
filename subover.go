@@ -145,10 +145,10 @@ func (s *Http) Check() {
 						fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s", provider.Name, s.Url)
 						
 						if provider.Name == "cloudfront" {
-							fmt.Printf("\n[!] For Cloudfront takeovers, please Check both HTTP & HTTPS ")
+							fmt.Printf("\n[\033[33;1;4m!\033[0m] For Cloudfront takeovers, please Check both HTTP & HTTPS ")
 						}
 						if provider.Name == "fastly" {
-							fmt.Printf("\n[!] For Fastly Takeovers, the root domain must be free.")
+							fmt.Printf("\n[\033[33;1;4m!\033[0m] For Fastly Takeovers, the root domain must be free.")
 						}
 						
 						break
@@ -231,6 +231,6 @@ func main() {
 
 	wg.Wait()
 	
-	fmt.Printf("\n\n* [#] Done, Enjoy Your Hunt :-)\n")
+	fmt.Printf("\n\n[#] Done, Enjoy Your Hunt :-)\n")
 
 }
