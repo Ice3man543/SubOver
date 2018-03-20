@@ -40,7 +40,7 @@ go build subover.go
 - Bitbucket
 - Smartling
 - Acquia
-- Fastly (Too many False Positives)
+- Fastly 
 - Pantheon
 - Zendesk
 - Uservoice
@@ -104,6 +104,11 @@ Meet me on Twitter: [@Ice3man543](https://twitter.com/ice3man543)
 
 ### Changelog
 
+#### [1.1.1] - 2018-03-20
+
+- Providers corrected using EdOverflow's Awesome List
+- Added Information regarding various takeovers to the tool
+
 #### [1.1.0] - 2018-03-16
 
 - Rewritten from scratch in Golang 
@@ -120,4 +125,4 @@ Meet me on Twitter: [@Ice3man543](https://twitter.com/ice3man543)
 - [subjack : Hostile Subdomain Takeover Tool Written In GO](https://github.com/haccer/subjack)
 - [Subdomain Takeover Scanner by 0x94](https://github.com/antichown/subdomain-takeover)
 - [Anshumanbh : tko-subs](https://github.com/anshumanbh/tko-subs)
-
+- [EdOverflow : can-i-take-over-xyz](https://github.com/edoverflow/can-i-take-over-xyz)
