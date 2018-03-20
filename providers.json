@@ -70,11 +70,6 @@
 		"response":["The page you have requested does not exist"]
 	},
 	{
-		"name":"squarespace",
-		"cname":["squarespace.com"],
-		"response":["is not available", "Website Expired", "You're Almost There..."]	
-	},
-	{
 		"name":"smartling",
 		"cname":["smartling.com"],
 		"response":["Domain is not configured"]
@@ -103,11 +98,6 @@
 		"name":"uservoice",
 		"cname":["uservoice.com"],
 		"response":["This UserVoice subdomain is currently available!"]
-	},
-	{
-		"name":"wpengine",
-		"cname":["wpengine.com"],
-		"response":["The site you were looking for couldn't be found", "This domain is successfully pointed at WP Engine, but is not configured for an account on our platform"]
 	},
 	{
 		"name":"ghost",
@@ -158,11 +148,6 @@
 		"name":"feedpress",
 		"cname":["redirect.feedpress.me"],
 		"response":["The feed has not been found."]
-	},
-	{
-		"name":"freshdesk",
-		"cname":["freshdesk.com"],
-		"response":["May be this is still fresh!"]
 	},
 	{
 		"name":"surge",
