@@ -38,14 +38,12 @@ go build subover.go
 - Amazonaws
 - Cloudfront
 - Bitbucket
-- Squarespace
 - Smartling
 - Acquia
-- Fastly
+- Fastly (Too many False Positives)
 - Pantheon
 - Zendesk
 - Uservoice
-- WPEngine
 - Ghost
 - Freshdesk
 - Pingdom
@@ -56,7 +54,6 @@ go build subover.go
 - Helpscout
 - Cargo
 - Feedpress
-- Freshdesk
 - Surge
 - Surveygizmo
 - Mashery
