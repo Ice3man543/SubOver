@@ -59,7 +59,7 @@ go build subover.go
 - Mashery
 
 
-Count : 36
+Count : 33
   
 ## Screenshot
 ![tool_in_action](https://raw.githubusercontent.com/Ice3man543/SubOver/master/subover.png)
