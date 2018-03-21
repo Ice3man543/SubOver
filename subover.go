@@ -49,11 +49,21 @@ type Http struct {
 	Url string
 }
 
-func Site(url string) (site string) {
-	if *Https {
-		site = "https://" + url
+func Site(url string, reverse bool) (site string) {
+	if *Https == true {
+		// If reverse bool flag is true, we just make an
+		// opposite of what we were gonna do
+		if reverse == false {
+			site = "https://" + url
+		} else {
+			site = "http://" + url
+		}
 	} else {
-		site = "http://" + url
+		if reverse == false {
+			site = "http://" + url
+		} else {
+			site = "https://" + url
+		}
 	}
 
 	return site
@@ -76,7 +86,7 @@ func init_providers() {
 
 
 
-func get_response_body(target string) (body []byte) {
+func get_response_body(target string, reverse bool) (body []byte) {
 
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
@@ -87,7 +97,7 @@ func get_response_body(target string) (body []byte) {
 		Timeout:   time.Duration(*Timeout) * time.Second,
 	}
 
-	req, err := http.NewRequest("GET", Site(target), nil)
+	req, err := http.NewRequest("GET", Site(target, reverse), nil)
 	if err != nil {
 		return
 	}
@@ -131,8 +141,10 @@ func (s *Http) Check() {
 				
 				// We have a valid cloud provider URL
 				// Now, let's check for takeovers
-				// Get the request Response 
-				body := get_response_body(s.Url)
+
+				// In first request, we need the response as the user
+				// specified via either HTTP or HTTPS
+				body := get_response_body(s.Url, false)
 
 				if *Verbose == true {
 					fmt.Printf("\n[\033[36;1;4m#\033[0m] Found Valid %s Service At : %s", provider.Name, s.Url)
@@ -145,8 +157,18 @@ func (s *Http) Check() {
 						fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s", provider.Name, s.Url)
 						
 						if provider.Name == "cloudfront" {
-							fmt.Printf("\n[\033[33;1;4m!\033[0m] For Cloudfront takeovers, please Check both HTTP & HTTPS ")
+							fmt.Printf("\n[\033[33;1;4m!\033[0m] Checking Cloudflare's Both HTTP & HTTPS Response ")
+							// Here, we just check the reverse of what user supplied. 
+							// This is handled in Site Function. For Example, if user supplied
+							// HTTP, we will check HTTPS
+							body = get_response_body(s.Url, true)
+							if bytes.Contains(body, []byte(response)) {
+								fmt.Println("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s With HTTP & HTTPS", provider.Name, s.Url)
+							} else {
+								fmt.Printf("\n[\033[33;1;4m!\033[0m] Cloudflare Takeover Not Possible at %s as both HTTP & HTTPS not free.", s.Url)
+							}
 						}
+
 						if provider.Name == "fastly" {
 							fmt.Printf("\n[\033[33;1;4m!\033[0m] For Fastly Takeovers, the root domain must be free.")
 						}
