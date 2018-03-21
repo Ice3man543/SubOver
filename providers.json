@@ -152,7 +152,7 @@
 	{
 		"name":"surveygizmo",
 		"cname":["privatedomain.sgizmo.com", "privatedomain.surveygizmo.eu", "privatedomain.sgizmoca.com"],
-		"response":["data-html-name=\"Header Logo Link\""]
+		"response":["data-html-name"]
 	},
 	{
 		"name":"mashery",
