@@ -7,7 +7,7 @@
 	{
 		"name":"heroku", 
 		"cname":["herokudns.com", "herokussl.com", "herokuapp.com"], 
-		"response":["There's nothing here, yet.", "herokucdn.com/error-pages/no-such-app.html", "<title>No such app</title>"]
+		"response":["There's nothing here", "herokucdn.com/error-pages/no-such-app.html", "<title>No such app</title>"]
 	},
 	{
 		"name":"unbounce",
