@@ -14,7 +14,7 @@ go build subover.go
 
 ## Usage
 
-` ./subover.py -l subdomains.txt`
+` ./subover -l subdomains.txt`
 - `-l` List of Subdomains 
 - `-t` Number of concurrent threads. (Default 10)
 - `-v` Show verbose output (Default False)
@@ -81,12 +81,12 @@ Yes, you're probably correct. Feel free to:
 - Not use it.
 - Show me how to do it better.
 
-# TODO
+## TODO
 
 - Add more services :-)
 - Improve the tool (There are many things that can be done :-) )
 
-### Development
+## Development
 
 Want to contribute? Great! 
 
@@ -100,22 +100,22 @@ BSD 2-Clause "Simplified" License
 
 ## Contact
 
-Meet me on Twitter: [@Ice3man543](https://twitter.com/ice3man543)
+Meet me on Twitter: [![Twitter](https://img.shields.io/badge/twitter-@now-blue.svg)](https://twitter.com/now)
 
-### Changelog
+## Changelog
 
-#### [1.1.1] - 2018-03-20
+### [1.1.1] - 2018-03-20
 
 - Providers corrected using EdOverflow's Awesome List
 - Added Information regarding various takeovers to the tool
 
-#### [1.1.0] - 2018-03-16
+### [1.1.0] - 2018-03-16
 
 - Rewritten from scratch in Golang 
 - This time it's damn fast because of Go Concurrency.
 - The console output looks better :-)
 
-#### [1.0.0] - 2018-02-04
+### [1.0.0] - 2018-02-04
 
 - Initial Release with 35 Services written in Python.
 - Pretty Slow :-)
