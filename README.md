@@ -100,7 +100,7 @@ BSD 2-Clause "Simplified" License
 
 ## Contact
 
-Meet me on Twitter: [![Twitter](https://img.shields.io/badge/twitter-@now-blue.svg)](https://twitter.com/now)
+Meet me on Twitter: [![Twitter](https://img.shields.io/badge/twitter-@ice3man543-blue.svg)](https://twitter.com/ice3man543)
 
 ## Changelog
 
