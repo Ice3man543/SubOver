@@ -7,7 +7,7 @@
 	{
 		"name":"heroku", 
 		"cname":["herokudns.com", "herokussl.com", "herokuapp.com"], 
-		"response":["There's nothing here", "herokucdn.com/error-pages/no-such-app.html", "<title>No such app</title>"]
+		"response":["There's nothing here, yet.", "herokucdn.com/error-pages/no-such-app.html", "<title>No such app</title>"]
 	},
 	{
 		"name":"unbounce",
@@ -36,8 +36,8 @@
 	},
 	{
 		"name":"tictail",
-		"cname":["tictail.com"],
-		"response":["Building a brand of your own?"]
+		"cname":["tictail.com", "domains.tictail.com"],
+		"response":["Building a brand of your own?", "to target URL: <a href=\"https://tictail.com", "Start selling on Tictail."]
 	},
 	{
 		"name":"campaignmonitor",
@@ -66,8 +66,8 @@
 	},
 	{
 		"name":"bitbucket",
-		"cname":["bitbucket.org", "bitbucket.io"],	
-		"response":["The page you have requested does not exist", "Repository not found"]
+		"cname":["bitbucket.org"],	
+		"response":["The page you have requested does not exist"]
 	},
 	{
 		"name":"smartling",
@@ -158,6 +158,96 @@
 		"name":"mashery",
 		"cname":["mashery.com"],
 		"response":["Unrecognized domain <strong>"]
+	},
+	{
+		"name":"intercom",
+		"cname":["custom.intercom.help"],
+		"response":["This page is reserved for artistic dogs.","<h1 class=\"headline\">Uh oh. That page doesn’t exist.</h1>"]
+	},
+	{
+		"name":"webflow",
+		"cname":["proxy.webflow.io"],
+		"response":["<p class=\"description\">The page you are looking for doesn't exist or has been moved.</p>"]
+	},
+	{
+		"name":"kajabi",
+		"cname":["endpoint.mykajabi.com"],
+		"response":["<h1>The page you were looking for doesn't exist.</h1>"]
+	},
+	{
+		"name":"thinkific",
+		"cname":["thinkific.com"],
+		"response":["You may have mistyped the address or the page may have moved."]
+	},
+	{
+		"name":"tave",
+		"cname":["clientaccess.tave.com"],
+		"response":["<h1>Error 404: Page Not Found</h1>"]
+	},
+	{
+		"name":"wishpond",
+		"cname":["wishpond.com"],
+		"response":["https://www.wishpond.com/404?campaign=true"]
+	},
+	{
+		"name":"aftership",
+		"cname":["aftership.com"],
+		"response":["Oops.</h2><p class=\"text-muted text-tight\">The page you're looking for doesn't exist."]
+	},
+	{
+		"name":"aha",
+		"cname":["ideas.aha.io"],
+		"response":["There is no portal here ... sending you back to Aha!"]
+	},
+	{
+		"name":"brightcove",
+		"cname":["brightcovegallery.com", "gallery.video", "bcvp0rtal.com"],
+		"response":["<p class=\"bc-gallery-error-code\">Error Code: 404</p>"]
+	},
+	{
+		"name":"bigcartel",
+		"cname":["bigcartel.com"],
+		"response":["<h1>Oops! We couldn&#8217;t find that page.</h1>"]
+	},
+	{
+		"name":"activecompaign",
+		"cname":["activehosted.com"],
+		"response":["alt=\"LIGHTTPD - fly light.\""]
+	},
+	{
+		"name":"compaignmonitor",
+		"cname":["createsend.com"],
+		"response":["Double check the URL or <a href=\"mailto:help@createsend.com"]
+	},
+	{
+		"name":"acquia",
+		"cname":["acquia-test.co"],
+		"response":["The site you are looking for could not be found."]
+	},
+	{
+		"name":"proposify",
+		"cname":["proposify.biz"],
+		"response":["If you need immediate assistance, please contact <a href=\"mailto:support@proposify.biz"]
+	},
+	{
+		"name":"simplebooklet",
+		"cname":["simplebooklet.com"],
+		"response":["We can't find this <a href=\"https://simplebooklet.com"]
+	},
+	{
+		"name":"getresponse",
+		"cname":[".gr8.com"],
+		"response":["With GetResponse Landing Pages, lead generation has never been easier"]
+	},
+	{
+		"name":"vend",
+		"cname":["vendecommerce.com"],
+		"response":["Looks like you've traveled too far into cyberspace."]
+	},
+	{
+		"name":"jetbrains",
+		"cname":["myjetbrains.com"],
+		"response":["is not a registered InCloud YouTrack."]
 	}
 ]
 
