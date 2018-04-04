@@ -57,9 +57,26 @@ go build subover.go
 - Surge
 - Surveygizmo
 - Mashery
+- Intercom
+- Webflow
+- Kajabi
+- Thinkific
+- Tave
+- Wishpond
+- Aftership
+- Aha
+- Brightcove
+- Bigcartel
+- Activecompaign
+- Compaignmonitor
+- Acquia
+- Proposify
+- Simplebooklet
+- Getresponse
+- Vend
+- Jetbrains
 
-
-Count : 33
+Count : 50
   
 ## Screenshot
 ![tool_in_action](https://raw.githubusercontent.com/Ice3man543/SubOver/master/subover.png)
