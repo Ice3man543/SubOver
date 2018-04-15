@@ -248,6 +248,11 @@
 		"name":"jetbrains",
 		"cname":["myjetbrains.com"],
 		"response":["is not a registered InCloud YouTrack."]
+	},
+	{
+		"name":"azure",
+		"cname":["azurewebsites.net"],
+		"response":["404 Web Site not found"]
 	}
 ]
 
