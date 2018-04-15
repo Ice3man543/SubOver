@@ -75,8 +75,9 @@ go build subover.go
 - Getresponse
 - Vend
 - Jetbrains
+- Azure
 
-Count : 50
+Count : 51
   
 ## Screenshot
 ![tool_in_action](https://raw.githubusercontent.com/Ice3man543/SubOver/master/subover.png)
