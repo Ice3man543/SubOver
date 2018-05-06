@@ -154,7 +154,6 @@ func (s *Http) Check() {
 					// check if response bodt contains takeoverable response
 					if bytes.Contains(body, []byte(response)) {
 						// Yippie, we have hit a jackpot
-						fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s", provider.Name, s.Url)
 						
 						if provider.Name == "cloudfront" {
 							fmt.Printf("\n[\033[33;1;4m!\033[0m] Checking Cloudflare's Both HTTP & HTTPS Response ")
@@ -164,11 +163,11 @@ func (s *Http) Check() {
 							body = get_response_body(s.Url, true)
 							if bytes.Contains(body, []byte(response)) {
 								fmt.Println("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s With HTTP & HTTPS", provider.Name, s.Url)
-							} else {
-								fmt.Printf("\n[\033[33;1;4m!\033[0m] Cloudflare Takeover Not Possible at %s as both HTTP & HTTPS not free.", s.Url)
 							}
+						} else {
+							fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s", provider.Name, s.Url)
 						}
-
+							
 						if provider.Name == "fastly" {
 							fmt.Printf("\n[\033[33;1;4m!\033[0m] For Fastly Takeovers, the root domain must be free.")
 						}
