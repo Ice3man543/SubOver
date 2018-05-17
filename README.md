@@ -7,14 +7,12 @@ Subover is a Hostile Subdomain Takeover tool originally written in python but re
 You need to have Golang installed on your machine. There are no additional requirements for this tool.
 
 ```sh
-git clone https://github.com/Ice3man543/SubOver.git
-cd SubOver
-go build subover.go
+go get github.com/Ice3man543/SubOver
 ```
 
 ## Usage
 
-` ./subover -l subdomains.txt`
+` ./SubOver -l subdomains.txt`
 - `-l` List of Subdomains 
 - `-t` Number of concurrent threads. (Default 10)
 - `-v` Show verbose output (Default False)
@@ -24,58 +22,7 @@ go build subover.go
 
 ## Currently Checked Services
 
-- Github
-- Heroku
-- Unbounce
-- Tumblr
-- Shopify
-- Instapage
-- Desk
-- Tictail
-- Campaignmonitor
-- Cargocollective
-- Statuspage
-- Amazonaws
-- Cloudfront
-- Bitbucket
-- Smartling
-- Acquia
-- Fastly 
-- Pantheon
-- Zendesk
-- Uservoice
-- Ghost
-- Freshdesk
-- Pingdom
-- Tilda
-- Wordpress
-- Teamwork
-- Helpjuice
-- Helpscout
-- Cargo
-- Feedpress
-- Surge
-- Surveygizmo
-- Mashery
-- Intercom
-- Webflow
-- Kajabi
-- Thinkific
-- Tave
-- Wishpond
-- Aftership
-- Aha
-- Brightcove
-- Bigcartel
-- Activecompaign
-- Compaignmonitor
-- Acquia
-- Proposify
-- Simplebooklet
-- Getresponse
-- Vend
-- Jetbrains
-- Azure
+> Github, Heroku, Unbounce, Tumblr, Shopify, Instapage, Desk, Tictail, Campaignmonitor, Cargocollective, Statuspage, Amazonaws, Cloudfront, Bitbucket, Smartling, Acquia, Fastly, Pantheon, Zendesk, Uservoice, Ghost, Freshdesk, Pingdom, Tilda, Wordpress, Teamwork, Helpjuice, Helpscout, Cargo, Feedpress, Surge, Surveygizmo, Mashery, Intercom, Webflow, Kajabi, Thinkific, Tave, Wishpond, Aftership, Aha, Brightcove, Bigcartel, Activecompaign, Compaignmonitor, Acquia, Proposify, Simplebooklet, Getresponse, Vend, Jetbrains, Azure
 
 Count : 51
   
