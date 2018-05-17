@@ -1,46 +1,50 @@
-// 
+//
 // subover.go : A Powerful Subdomain Takeover Tool
 //
 // Written By : @ice3man (Nizamul Rana)
 // Github : https://github.com/ice3man543
 //
-// A Complete Rewrite in Go. Why ? 
+// A Complete Rewrite in Go. Why ?
 // 	Because Go is much faster and I wanted to learn it.
 //
 
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
-	"flag"
 	"bufio"
-	"net/http"
-	"strings"
-	"os"
-	"encoding/json"
-	"sync"
-	"crypto/tls"
-	"time"
-	"net"
 	"bytes"
+	"crypto/tls"
+	"encoding/json"
+	"flag"
+	"fmt"
+	"io"
+	"io/ioutil"
+	"net"
+	"net/http"
+	"os"
+	"strings"
+	"sync"
+	"time"
 )
 
 var (
 	Targetlist = flag.String("l", "", "Path to target list")
-	Https    = flag.Bool("https", false, "Force HTTPS connections (Default: http://)")
+	Https      = flag.Bool("https", false, "Force HTTPS connections (Default: http://)")
 	Verbose    = flag.Bool("v", false, "Show Verbose Output")
-	Usage	 = flag.Bool("h", false, "Show This Message")
-	Threads  = flag.Int("t", 10, "Number of threads (Default: 10)")
-	Timeout  = flag.Int("timeout", 10, "Seconds to wait before timeout (Default: 10).")
+	Usage      = flag.Bool("h", false, "Show This Message")
+	Threads    = flag.Int("t", 10, "Number of threads (Default: 10)")
+	Timeout    = flag.Int("timeout", 10, "Seconds to wait before timeout (Default: 10).")
+	Output     = flag.String("o", "", "Path to write output to")
 )
+
+var output string
 
 var targets []string
 
 type provider_data struct {
-	Name 		string 		`json:"name"`
-	Cname 	  	[]string 	`json:"cname"`
-	Response	[]string 	`json:"response"`
+	Name     string   `json:"name"`
+	Cname    []string `json:"cname"`
+	Response []string `json:"response"`
 }
 
 var providers []provider_data
@@ -72,19 +76,17 @@ func Site(url string, reverse bool) (site string) {
 // Initialize the providers data :-)
 func init_providers() {
 	raw, err := ioutil.ReadFile("./providers.json")
-    if err != nil {
-        fmt.Println(err.Error())
-        os.Exit(1)
-    }
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
 
-    err = json.Unmarshal(raw, &providers)
-    if (err != nil) {
-    	fmt.Printf("%s", err)
-    	os.Exit(1)
-    }
+	err = json.Unmarshal(raw, &providers)
+	if err != nil {
+		fmt.Printf("%s", err)
+		os.Exit(1)
+	}
 }
-
-
 
 func get_response_body(target string, reverse bool) (body []byte) {
 
@@ -115,7 +117,7 @@ func get_response_body(target string, reverse bool) (body []byte) {
 
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return 
+		return
 	}
 
 	return body
@@ -138,7 +140,7 @@ func (s *Http) Check() {
 	for _, provider := range providers {
 		for _, cname := range provider.Cname {
 			if strings.Contains(target_cname, cname) {
-				
+
 				// We have a valid cloud provider URL
 				// Now, let's check for takeovers
 
@@ -154,24 +156,20 @@ func (s *Http) Check() {
 					// check if response bodt contains takeoverable response
 					if bytes.Contains(body, []byte(response)) {
 						// Yippie, we have hit a jackpot
-						
+
 						if provider.Name == "cloudfront" {
-							fmt.Printf("\n[\033[33;1;4m!\033[0m] Checking Cloudflare's Both HTTP & HTTPS Response ")
-							// Here, we just check the reverse of what user supplied. 
+							// Here, we just check the reverse of what user supplied.
 							// This is handled in Site Function. For Example, if user supplied
 							// HTTP, we will check HTTPS
 							body = get_response_body(s.Url, true)
 							if bytes.Contains(body, []byte(response)) {
-								fmt.Println("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s With HTTP & HTTPS", provider.Name, s.Url)
+								fmt.Println("\n[\033[31;1;4mCLOUDFRONT\033[0m] Takeover Possible At : %s With HTTP & HTTPS", s.Url)
+								output = output + fmt.Sprintf("cloudfront:%s;", s.Url)
 							}
 						} else {
 							fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s", provider.Name, s.Url)
+							output = output + fmt.Sprintf("%s:%s;", provider.Name, s.Url)
 						}
-							
-						if provider.Name == "fastly" {
-							fmt.Printf("\n[\033[33;1;4m!\033[0m] For Fastly Takeovers, the root domain must be free.")
-						}
-						
 						break
 					}
 				}
@@ -193,7 +191,7 @@ func main() {
 	fmt.Println("")
 	fmt.Println("SubOver v.1.1              Nizamul Rana (@Ice3man)")
 	fmt.Println("==================================================\n")
-	
+
 	if *Usage == true {
 		fmt.Println("")
 		flag.Usage()
@@ -222,7 +220,7 @@ func main() {
 	scanner := bufio.NewScanner(file)
 	buf := make([]byte, 0, 1024*1024)
 	scanner.Buffer(buf, 10*1024*1024)
-	
+
 	for scanner.Scan() {
 		targets = append(targets, scanner.Text())
 	}
@@ -237,7 +235,7 @@ func main() {
 		wg.Add(1)
 
 		go func() {
-			for url := range urls { 
+			for url := range urls {
 				url.Check()
 			}
 
@@ -253,7 +251,21 @@ func main() {
 	close(urls)
 
 	wg.Wait()
-	
-	fmt.Printf("\n\n[#] Done, Enjoy Your Hunt :-)\n")
 
+	if *Output != "" {
+		file, err = os.OpenFile(*Output, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+		if err != nil {
+			return
+		}
+
+		defer file.Close()
+
+		_, err = io.WriteString(file, output)
+		if err != nil {
+			fmt.Printf("\n%v\n", err)
+			os.Exit(1)
+		}
+	}
+
+	fmt.Printf("\n\n[#] Done, Enjoy Your Hunt :-)\n")
 }
