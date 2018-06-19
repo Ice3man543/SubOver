@@ -9,8 +9,10 @@ import (
     "fmt"
     "github.com/parnurzeal/gorequest"
     "io/ioutil"
+    "log"
     "net"
     "os"
+    "path/filepath"
     "strings"
     "sync"
     "time"
@@ -38,7 +40,12 @@ var (
 )
 
 func InitializeProviders() {
-    raw, err := ioutil.ReadFile("./providers.json")
+    dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+    if err != nil {
+        fmt.Printf("%s", err)
+        os.Exit(1)
+    }
+    raw, err := ioutil.ReadFile(dir + "/providers.json")
     if err != nil {
         fmt.Println(err.Error())
         os.Exit(1)
@@ -106,35 +113,65 @@ func CNAMEExists(key string) bool {
     return false
 }
 
-func Checker(target string) {
-    TargetCNAME, err := net.LookupCNAME(target)
-    fmt.Printf("DEBUG: %s=>%s\n", target, TargetCNAME)
-    if err != nil {
-        return
-    } else {
-        if (All != true && CNAMEExists(TargetCNAME)) || (All == true) {
-            _, body, errs := Get(target, 120, ForceHTTPS)
-            if len(errs) <= 0 {
-                for _, provider := range Providers {
-                    for _, response := range provider.Response {
-                        if strings.Contains(body, response) == true {
+func Check(target string, TargetCNAME string) {
+    _, body, errs := Get(target, Timeout, ForceHTTPS)
+    if len(errs) <= 0 {
+        if TargetCNAME == "" {
+            for _, provider := range Providers {
+                for _, response := range provider.Response {
+                    if strings.Contains(body, response) == true {
+                        fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At %s ", provider.Name, target)
+                    }
 
-                            switch provider.Name {
-                            case "cloudfront":
-                                _, body2, _ := Get(target, 120, true)
-                                if strings.Contains(body2, response) == true {
-                                    fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s", provider.Name, target)
+                    return
+                }
+            }
+        } else {
+            // This is a less false positives way
+            for _, provider := range Providers {
+                for _, cname := range provider.Cname {
+                    if strings.Contains(TargetCNAME, cname) {
+                        for _, response := range provider.Response {
+                            if strings.Contains(body, response) == true {
+                                if provider.Name == "cloudfront" {
+                                    _, body2, _ := Get(target, 120, true)
+                                    if strings.Contains(body2, response) == true {
+                                        fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s", provider.Name, target)
+                                    }
+                                } else {
+                                    fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At %s with CNAME %s", provider.Name, target, TargetCNAME)
                                 }
-
-                            default:
-                                fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s", provider.Name, target)
                             }
-
-                            break
+                            return
                         }
                     }
                 }
             }
+        }
+    } else {
+        if Verbose == true {
+            log.Printf("[ERROR] Get: %s => %v", target, errs)
+        }
+    }
+
+    return
+}
+
+func Checker(target string) {
+    TargetCNAME, err := net.LookupCNAME(target)
+    if err != nil {
+        return
+    } else {
+        if All != true && CNAMEExists(TargetCNAME) == true {
+            if Verbose == true {
+                log.Printf("[SELECTED] %s => %s", target, TargetCNAME)
+            }
+            Check(target, TargetCNAME)
+        } else if All == true {
+            if Verbose == true {
+                log.Printf("[ALL] %s ", target)
+            }
+            Check(target, "ALL")
         }
     }
 }
@@ -147,7 +184,7 @@ func main() {
     fmt.Println("==================================================\n")
 
     if HostsList == "" {
-        fmt.Printf("[!] No hosts list specified !")
+        fmt.Printf("SubOver: No hosts list specified for testing!")
         fmt.Printf("\nUse -h for usage options\n")
         os.Exit(1)
     }
