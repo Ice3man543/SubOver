@@ -12,7 +12,6 @@ import (
     "log"
     "net"
     "os"
-    "path/filepath"
     "strings"
     "sync"
     "time"
@@ -40,12 +39,7 @@ var (
 )
 
 func InitializeProviders() {
-    dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-    if err != nil {
-        fmt.Printf("%s", err)
-        os.Exit(1)
-    }
-    raw, err := ioutil.ReadFile(dir + "/providers.json")
+    raw, err := ioutil.ReadFile(fmt.Sprintf("%s/src/github.com/Ice3man543/SubOver/providers.json", os.Getenv("GOPATH")))
     if err != nil {
         fmt.Println(err.Error())
         os.Exit(1)

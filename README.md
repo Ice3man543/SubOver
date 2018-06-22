@@ -10,6 +10,8 @@ You need to have Golang installed on your machine. There are no additional requi
 go get github.com/Ice3man543/SubOver
 ```
 
+> NOTE - Do not change the location of providers.json file. Or the tool will not work. 
+
 ## Usage
 
 ` ./SubOver -l subdomains.txt`
