@@ -16,6 +16,7 @@ go get github.com/Ice3man543/SubOver
 
 ` ./SubOver -l subdomains.txt`
 - `-l` List of Subdomains 
+- `-a` Check all hosts regardless of CNAME (Time Consuming and prone to fp's)
 - `-t` Number of concurrent threads. (Default 10)
 - `-v` Show verbose output (Default False)
 - `-https` Force HTTPS Connection (Default HTTP)
@@ -70,6 +71,12 @@ BSD 2-Clause "Simplified" License
 Meet me on Twitter: [![Twitter](https://img.shields.io/badge/twitter-@ice3man543-blue.svg)](https://twitter.com/ice3man543)
 
 ## Changelog
+
+### [1.2] 2018-05-19
+- Refactored whole code making it cleaner
+- Added better error handling and more verbose stuff
+- Implemented checking all domains
+- Fixed other stuff, etc...
 
 ### [1.1.1] - 2018-03-20
 
