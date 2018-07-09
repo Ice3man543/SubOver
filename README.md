@@ -59,6 +59,8 @@ Yes, you're probably correct. Feel free to:
 Want to contribute? Great! 
 
 You can add more services or recommend any changes to the existing ones. Any kind of help is appreciated.
+Or buy me a coffee \o/
+[![ko-fi](https://www.ko-fi.com/img/donate_sm.png)](https://ko-fi.com/M4M7FAVC)
 
 License
 ----
