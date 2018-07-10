@@ -62,6 +62,7 @@ You can add more services or recommend any changes to the existing ones. Any kin
 
 Or buy me a coffee \o/
 
+[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/Ice3man)
 [![ko-fi](https://www.ko-fi.com/img/donate_sm.png)](https://ko-fi.com/M4M7FAVC)
 
 License
