@@ -39,7 +39,7 @@ var (
 )
 
 func InitializeProviders() {
-    raw, err := ioutil.ReadFile(fmt.Sprintf("%s/src/github.com/Ice3man543/SubOver/providers.json", os.Getenv("GOPATH")))
+    raw, err := ioutil.ReadFile("providers.json")
     if err != nil {
         fmt.Println(err.Error())
         os.Exit(1)
