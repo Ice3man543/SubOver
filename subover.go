@@ -110,14 +110,13 @@ func CNAMEExists(key string) bool {
 func Check(target string, TargetCNAME string) {
     _, body, errs := Get(target, Timeout, ForceHTTPS)
     if len(errs) <= 0 {
-        if TargetCNAME == "" {
+        if TargetCNAME == "ALL" {
             for _, provider := range Providers {
                 for _, response := range provider.Response {
                     if strings.Contains(body, response) == true {
                         fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At %s ", provider.Name, target)
+			return
                     }
-
-                    return
                 }
             }
         } else {
