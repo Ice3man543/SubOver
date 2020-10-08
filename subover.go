@@ -39,7 +39,7 @@ var (
 )
 
 func InitializeProviders() {
-    raw, err := ioutil.ReadFile("~/go/src/github.com/Ice3man543/SubOver/providers.json")
+    raw, err := ioutil.ReadFile("/root/go/src/github.com/Ice3man543/SubOver/providers.json")
     if err != nil {
         fmt.Println(err.Error())
         os.Exit(1)
