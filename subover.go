@@ -7,7 +7,6 @@ import (
     "encoding/json"
     "flag"
     "fmt"
-    "github.com/parnurzeal/gorequest"
     "io/ioutil"
     "log"
     "net"
@@ -15,6 +14,8 @@ import (
     "strings"
     "sync"
     "time"
+
+    "github.com/parnurzeal/gorequest"
 )
 
 // Structure for each provider stored in providers.json file
@@ -36,13 +37,13 @@ var (
     ForceHTTPS bool
     Timeout    int
     OutputFile string
+    providers  string
 )
 
 func InitializeProviders() {
     raw, err := ioutil.ReadFile("providers.json")
     if err != nil {
-        fmt.Println(err.Error())
-        os.Exit(1)
+        Providers = fingerprints(providers)
     }
 
     err = json.Unmarshal(raw, &Providers)
@@ -69,7 +70,7 @@ func ReadFile(file string) (lines []string, err error) {
 }
 
 func Get(url string, timeout int, https bool) (resp gorequest.Response, body string, errs []error) {
-    if https == true {
+    if https {
         url = fmt.Sprintf("https://%s/", url)
     } else {
         url = fmt.Sprintf("http://%s/", url)
@@ -91,6 +92,7 @@ func ParseArguments() {
     flag.BoolVar(&ForceHTTPS, "https", false, "Force HTTPS connections (Default: http://)")
     flag.IntVar(&Timeout, "timeout", 10, "Seconds to wait before timeout")
     flag.StringVar(&OutputFile, "o", "", "File to write enumeration output to")
+    flag.StringVar(&providers, "p", "", "Path to configuration file. (default \"/src/Ice3man543/SubOver/fingerprints.json\")")
 
     flag.Parse()
 }
@@ -113,9 +115,9 @@ func Check(target string, TargetCNAME string) {
         if TargetCNAME == "ALL" {
             for _, provider := range Providers {
                 for _, response := range provider.Response {
-                    if strings.Contains(body, response) == true {
+                    if strings.Contains(body, response) {
                         fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At %s ", provider.Name, target)
-			return
+                        return
                     }
                 }
             }
@@ -125,10 +127,10 @@ func Check(target string, TargetCNAME string) {
                 for _, cname := range provider.Cname {
                     if strings.Contains(TargetCNAME, cname) {
                         for _, response := range provider.Response {
-                            if strings.Contains(body, response) == true {
+                            if strings.Contains(body, response) {
                                 if provider.Name == "cloudfront" {
                                     _, body2, _ := Get(target, 120, true)
-                                    if strings.Contains(body2, response) == true {
+                                    if strings.Contains(body2, response) {
                                         fmt.Printf("\n[\033[31;1;4m%s\033[0m] Takeover Possible At : %s", provider.Name, target)
                                     }
                                 } else {
@@ -142,7 +144,7 @@ func Check(target string, TargetCNAME string) {
             }
         }
     } else {
-        if Verbose == true {
+        if Verbose {
             log.Printf("[ERROR] Get: %s => %v", target, errs)
         }
     }
@@ -155,18 +157,32 @@ func Checker(target string) {
     if err != nil {
         return
     } else {
-        if All != true && CNAMEExists(TargetCNAME) == true {
-            if Verbose == true {
+        if All != true && CNAMEExists(TargetCNAME) {
+            if Verbose {
                 log.Printf("[SELECTED] %s => %s", target, TargetCNAME)
             }
             Check(target, TargetCNAME)
-        } else if All == true {
-            if Verbose == true {
+        } else if All {
+            if Verbose {
                 log.Printf("[ALL] %s ", target)
             }
             Check(target, "ALL")
         }
     }
+}
+
+func fingerprints(file string) (data []ProviderData) {
+    config, err := ioutil.ReadFile(file)
+    if err != nil {
+        log.Fatalln(err)
+    }
+
+    err = json.Unmarshal(config, &data)
+    if err != nil {
+        log.Fatalln(err)
+    }
+
+    return data
 }
 
 func main() {
