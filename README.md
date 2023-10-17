@@ -2,7 +2,7 @@
 ## Note - This project is discontinued. No more updates will be provided! Sorry!
 > But something more awesome will come soon! 
 
-Subover is a Hostile Subdomain Takeover tool originally written in python but rewritten from scratch in Golang. Since it's redesign, it has been aimed with speed and efficiency in mind. Till date, SubOver detects 30+ services which is much more than any other tool out there. The tool uses Golang concurrency and hence is very fast. It can easily detect and report potential subdomain takeovers that exist. The list of potentially hijackable services is very comprehensive and it is what makes this tool so powerful.
+Subover is a Hostile Subdomain Takeover tool originally written in python but rewritten from scratch in Golang. Since it"s redesign, it has been aimed with speed and efficiency in mind. Till date, SubOver detects 30+ services which is much more than any other tool out there. The tool uses Golang concurrency and hence is very fast. It can easily detect and report potential subdomain takeovers that exist. The list of potentially hijackable services is very comprehensive and it is what makes this tool so powerful.
 
 ## Installing
 
@@ -18,7 +18,7 @@ go get github.com/Ice3man543/SubOver
 
 ` ./SubOver -l subdomains.txt`
 - `-l` List of Subdomains 
-- `-a` Check all hosts regardless of CNAME (Time Consuming and prone to fp's)
+- `-a` Check all hosts regardless of CNAME (Time Consuming and prone to fp"s)
 - `-t` Number of concurrent threads. (Default 10)
 - `-v` Show verbose output (Default False)
 - `-https` Force HTTPS Connection (Default HTTP)
@@ -37,7 +37,7 @@ Count : 51
 ## FAQ
 **Q:** What should my wordlist look like?
 
-**A:** Your wordlist should include a list of subdomains you're checking and should look something like:
+**A:** Your wordlist should include a list of subdomains you"re checking and should look something like:
 ```
 backend.example.com
 something.someone.com
@@ -46,7 +46,7 @@ apo-setup.fxc.something.com
 
 ## Your tool sucks!
 
-Yes, you're probably correct. Feel free to:
+Yes, you"re probably correct. Feel free to:
 
 - Not use it.
 - Show me how to do it better.
@@ -87,13 +87,13 @@ Meet me on Twitter: [![Twitter](https://img.shields.io/badge/twitter-@ice3man543
 
 ### [1.1.1] - 2018-03-20
 
-- Providers corrected using EdOverflow's Awesome List
+- Providers corrected using EdOverflow"s Awesome List
 - Added Information regarding various takeovers to the tool
 
 ### [1.1.0] - 2018-03-16
 
 - Rewritten from scratch in Golang 
-- This time it's damn fast because of Go Concurrency.
+- This time it"s damn fast because of Go Concurrency.
 - The console output looks better :-)
 
 ### [1.0.0] - 2018-02-04
