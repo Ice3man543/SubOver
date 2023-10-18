@@ -2,12 +2,12 @@
 	{
 		"name":"github", 
 		"cname":["github.io", "github.map.fastly.net"], 
-		"response":["There isn't a GitHub Pages site here.", "For root URLs (like http://example.com/) you must provide an index.html file"]
+		"response":["There isn"t a GitHub Pages site here.", "For root URLs (like http://example.com/) you must provide an index.html file"]
 	},
 	{
 		"name":"heroku", 
 		"cname":["herokudns.com", "herokussl.com", "herokuapp.com"], 
-		"response":["There's nothing here, yet.", "herokucdn.com/error-pages/no-such-app.html", "<title>No such app</title>"]
+		"response":["There"s nothing here, yet.", "herokucdn.com/error-pages/no-such-app.html", "<title>No such app</title>"]
 	},
 	{
 		"name":"unbounce",
@@ -17,7 +17,7 @@
 	{
 		"name":"tumblr",
 		"cname":["tumblr.com"],
-		"response":["There's nothing here.", "Whatever you were looking for doesn't currently exist at this address."]
+		"response":["There"s nothing here.", "Whatever you were looking for doesn"t currently exist at this address."]
 	},
 	{
 		"name":"shopify",
@@ -27,12 +27,12 @@
 	{
 		"name":"instapage",
 		"cname":["pageserve.co", "secure.pageserve.co", "https://instapage.com/"],
-		"response":["You've Discovered A Missing Link. Our Apologies!"]
+		"response":["You"ve Discovered A Missing Link. Our Apologies!"]
 	},
 	{
 		"name":"desk",
 		"cname":["desk.com"],
-		"response":["Please try again or try Desk.com free for 14 days.", "Sorry, We Couldn't Find That Page"]
+		"response":["Please try again or try Desk.com free for 14 days.", "Sorry, We Couldn"t Find That Page"]
 	},
 	{
 		"name":"tictail",
@@ -122,12 +122,12 @@
 	{
 		"name":"teamwork",
 		"cname":["teamwork.com"],
-		"response":["Oops - We didn't find your site."]
+		"response":["Oops - We didn"t find your site."]
 	},
 	{
 		"name":"helpjuice",
 		"cname":["helpjuice.com"],
-		"response":["We could not find what you're looking for."]
+		"response":["We could not find what you"re looking for."]
 	},
 	{
 		"name":"helpscout",
@@ -137,7 +137,7 @@
 	{
 		"name":"cargo",
 		"cname":["cargocollective.com"],
-		"response":["If you're moving your domain away from Cargo you must make this configuration through your registrar's DNS control panel."]
+		"response":["If you"re moving your domain away from Cargo you must make this configuration through your registrar"s DNS control panel."]
 	},
 	{
 		"name":"feedpress",
@@ -167,12 +167,12 @@
 	{
 		"name":"webflow",
 		"cname":["proxy.webflow.io"],
-		"response":["<p class=\"description\">The page you are looking for doesn't exist or has been moved.</p>"]
+		"response":["<p class=\"description\">The page you are looking for doesn"t exist or has been moved.</p>"]
 	},
 	{
 		"name":"kajabi",
 		"cname":["endpoint.mykajabi.com"],
-		"response":["<h1>The page you were looking for doesn't exist.</h1>"]
+		"response":["<h1>The page you were looking for doesn"t exist.</h1>"]
 	},
 	{
 		"name":"thinkific",
@@ -192,7 +192,7 @@
 	{
 		"name":"aftership",
 		"cname":["aftership.com"],
-		"response":["Oops.</h2><p class=\"text-muted text-tight\">The page you're looking for doesn't exist."]
+		"response":["Oops.</h2><p class=\"text-muted text-tight\">The page you"re looking for doesn"t exist."]
 	},
 	{
 		"name":"aha",
@@ -232,7 +232,7 @@
 	{
 		"name":"simplebooklet",
 		"cname":["simplebooklet.com"],
-		"response":["We can't find this <a href=\"https://simplebooklet.com"]
+		"response":["We can"t find this <a href=\"https://simplebooklet.com"]
 	},
 	{
 		"name":"getresponse",
@@ -242,7 +242,7 @@
 	{
 		"name":"vend",
 		"cname":["vendecommerce.com"],
-		"response":["Looks like you've traveled too far into cyberspace."]
+		"response":["Looks like you"ve traveled too far into cyberspace."]
 	},
 	{
 		"name":"jetbrains",
